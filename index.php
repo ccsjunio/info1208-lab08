@@ -28,8 +28,8 @@
         // markup template changing only the variables
         $markup = <<<EOF
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">I have $article $holdingName</label>
+            <input type="checkbox" class="form-check-input" id="$holdingId" name="holding[]" value="$holdingId" >
+            <label class="form-check-label" for="exampleCheck1"><i class="fas $holdingIcon"></i>   I have $article $holdingName</label>
         </div>
         EOF;
 
