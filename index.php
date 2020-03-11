@@ -27,16 +27,10 @@
 
         // markup template changing only the variables
         $markup = <<<EOF
-            <div class="form-group row">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="sports_played[]" value="basketball"> basketball<br>
-
-                    <!--
-                    <input type="checkbox" class="custom-control-input" id="$holdingId" name="holding[]" value="$holdingId"> 
-                    <label class="custom-control-label" for="holdingCheck$holdingId"><i class="fas $holdingIcon"></i>I have $article $holdingName</label>
-                    -->
-                </div>
-            </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">I have $article $holdingName</label>
+        </div>
         EOF;
 
         // adding markup from this holding to the main markup
@@ -53,12 +47,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <script src="https://kit.fontawesome.com/5163503c2c.js" crossorigin="anonymous"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/style/main.css"/>
     
-    <script src="https://kit.fontawesome.com/5163503c2c.js" crossorigin="anonymous"></script>
-
+    
     <title>INFO 1208 - LAB08</title>
   </head>
   <body>
