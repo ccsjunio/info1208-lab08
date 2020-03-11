@@ -4,8 +4,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    define("__OUTPUTFILE","/lab8_carlos_ferraz_output.php");
-    define("_ROOTFOLDER_",$_SERVER['DOCUMENT_ROOT']);
+    define("__OUTPUTFILE", "/lab8_carlos_ferraz_output.php");
+    define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);
 
     require_once _ROOTFOLDER_."/data/data.php";
 
@@ -23,14 +23,18 @@
         // identifies if the holding name initiates with a vowel
         // in order to agree with the article
         $pattern = '/^[aeiou]/';
-        $article = preg_match($pattern,$holdingName)===0 ? "a" : "an";
+        $article = preg_match($pattern, $holdingName)===0 ? "a" : "an";
 
         // markup template changing only the variables
         $markup = <<<EOF
             <div class="form-group row">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="$holdingId" name="holding[]" value="$holdingId">
+                    <input type="checkbox" name="sports_played[]" value="basketball"> basketball<br>
+
+                    <!--
+                    <input type="checkbox" class="custom-control-input" id="$holdingId" name="holding[]" value="$holdingId"> 
                     <label class="custom-control-label" for="holdingCheck$holdingId"><i class="fas $holdingIcon"></i>I have $article $holdingName</label>
+                    -->
                 </div>
             </div>
         EOF;
@@ -41,10 +45,6 @@
     }
 
 ?>
-
-
-
-
 
 <!doctype html>
 <html lang="en">
