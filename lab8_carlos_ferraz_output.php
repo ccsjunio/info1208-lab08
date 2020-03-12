@@ -1,6 +1,61 @@
 <?php
 
-    print_r($_POST['holding']);
+define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);    
+
+// if holding posts have no value and was not defined
+// redirect to error page
+// when no checkbox is marked no array is sent 
+// from the form
+if(!isset($_POST['holding'])){
+    header("Location:".$_SERVER['REMOTE_HOST']."/views/404.php");
+}
+
+// include functions file statements
+include _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
+
+    require_once _ROOTFOLDER_."/data/data.php";
+
+    $holdingsPosted = $_POST['holding'];
+    $holdingsDeclared = array();
+
+    $holdingsMarkup = "";
+
+    $columnsPerRow = 3;
+    $row = 1;
+    $column = 1;
+
+    foreach($holdingsPosted as $key=>$id){
+        echo "key=$key and value=$id";
+        if($column===1){
+            $holdingsMarkup .= '<div class="row">';
+        }
+
+        $holdingName = ($holdings[$id]['name']);
+        $holdingImage = $_SERVER['REMOTE_HOST']."/img/".$holdings[$id]['image'];
+
+        $holdingsMarkup .= <<<EOF
+        
+            <div class="col-sm">
+                <div class="card">
+                    <img src="$holdingImage" width="300"/>
+                    <div class="card-body">
+                    <h5 class="card-title">$holdingName</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                
+            </div>
+        EOF;
+
+        if($column===$columnsPerRow){
+            $holdingsMarkup .= '</div>';
+        }
+
+        if(++$column>$columnsPerRow){
+            $row++;
+        }
+    }
 
 ?>
 
@@ -22,15 +77,15 @@
   <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Tell us about your Holdings</h1>
-            <p class="lead">Don't worry, this information will not be disclosed and will remain anonymous</p>
+            <h1 class="display-4">The user owns:</h1>
         </div>
     </div>
 
-    <form class="container">
-        <!-- include markup for the holdings choices
-        <?php echo $holdingChoicesMarkup ?> 
-    </form>
+    <div class="container">
+        
+        <!-- include markup for the holdings choices -->
+        <?php echo $holdingsMarkup; ?> 
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

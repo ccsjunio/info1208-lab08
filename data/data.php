@@ -1,30 +1,30 @@
 <?php
     $holdings = array(
-        array(
+        "1"=>array(
             "id"    =>  1,
             "name"  =>  "bike",
             "image" =>  "bike.png",
             "icon"  =>  "fa-biking"
         ),
-        array(
+        "2"=>array(
             "id"    =>  2,
             "name"  =>  "car",
-            "image" =>  "car.png",
+            "image" =>  "car.jpg",
             "icon"  =>  "fa-car"
         ),
-        array(
+        "3"=>array(
             "id"    =>  3,
             "name"  =>  "boat",
-            "image"=>   "boat.png",
+            "image"=>   "boat.jpg",
             "icon"  =>  "fa-ship"
         ),
-        array(
+        "4"=>array(
             "id"    =>  4,
             "name"  =>  "house",
             "image" =>  "house.png",
             "icon"  =>  "fa-home"
         ),
-        array(
+        "5"=>array(
             "id"    =>  5,
             "name"  =>  "apartment",
             "image" =>  "apartment.png",

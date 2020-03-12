@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
 
     define("__OUTPUTFILE", "/lab8_carlos_ferraz_output.php");
     define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);
