@@ -4,11 +4,15 @@
     define("__OUTPUTFILE", "/lab8_carlos_ferraz_output.php");
     define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);
 
-    require_once _ROOTFOLDER_."/data/data.php";
+    // include the database file that provides data to the funcionality
+    include_once _ROOTFOLDER_."/data/data.php";
+    // include the functions file for using customized functions
+    include_once _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
 
     // define markup for holdings checkboxs within the form
     $holdingChoicesMarkup = "";
 
+    // iterate through the holdings array from the database
     foreach ($holdings as $holding) {
 
         //get holding information
@@ -17,7 +21,7 @@
         $holdingPicture = $holding['image'];
         $holdingIcon    = $holding['icon'];
 
-        $article = undefinedArticleTo($holdingName)
+        $article = undefinedArticleTo($holdingName);
 
         // markup template changing only the variables
         $markup = <<<EOF

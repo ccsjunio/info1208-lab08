@@ -22,7 +22,7 @@
     font-family:"Roboto", sans-serif;
 }
 
-.jumbotron:nth-last-of-type(2){
+.jumbotron:not(:first-of-type){
     margin-top:30px;
 }
 

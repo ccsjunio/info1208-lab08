@@ -5,41 +5,50 @@ define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);
 // redirect to error page
 // when no checkbox is marked no array is sent 
 // from the form
-if(!isset($_POST['holding'])){
-    header("Location:".$_SERVER['REMOTE_HOST']."/views/204.php");
+if(!array_key_exists("holding",$_POST)){
+    header("Location:http://".$_SERVER['SERVER_NAME']."/views/204.php");
+    die();
 }
 
 // include functions file statements
 include_once _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
-
-    require_once _ROOTFOLDER_."/data/data.php";
+// include holdings data from database file
+include_once _ROOTFOLDER_."/data/data.php";
 
     $sanitizedPosting = sanitizeArray($_POST['holding']);
     $holdingsPosted = $sanitizedPosting ? $sanitizedPosting : false;
 
     if(!$holdingsPosted){
-        header("Location:".$_SERVER['REMOTE_HOST']."/views/406.php");
+        header("Location:".$_SERVER['SERVER_NAME']."/views/406.php");
     }
 
-    $holdingsDeclared = array();
-
+    // variable to hold the holdings markup to be displayed
     $holdingsMarkup = "";
 
+    // number of columns of holdings per row
     $columnsPerRow = 3;
+    //initialize rows, columns and holding counter
     $row = 1;
     $column = 1;
     $counter = 1;
 
+    // iterate for the clean holdings posted array to build
+    // the markup
     foreach($holdingsPosted as $key=>$id){
+        // if the row is beginning, build the correct 
+        // bootstrap markup for it
         if($column===1){
             $holdingsMarkup .= '<div class="row">';
         }
 
+        // load variables with the holdings properties
         $holdingName = ($holdings[$id]['name']);
         $holdingImage = $_SERVER['HTTP_REFERER']."/img/".$holdings[$id]['image'];
-
+        // build the correct undefined article for the
+        // holding noun
         $holdingName = undefinedArticleTo($holdingName) . " " . $holdingName;
 
+        // build the holding markup for this iteration
         $holdingsMarkup .= <<<EOF
             <div class="col">
                 <div class="card">
@@ -54,7 +63,7 @@ include_once _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
         EOF;
 
         // end row markup if line ends
-        if($column===$columnsPerRow || ++$counter===count($holdingsPosted)){
+        if($column===$columnsPerRow || ++$counter===count($holdingsPosted) || count($holdingsPosted)===1 ){
             $holdingsMarkup .= '</div>';
         }
 
@@ -115,9 +124,9 @@ include_once _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
     <div class="container variableDump">
         <?php 
             if(function_exists('mysqli_connect')){
-                echo "Function mysqli_connect is avalable";
+                echo "Function mysqli_connect is avalable! Yay!";
             } else {
-                echo "Function mysqli_connect is not available. Yay!";
+                echo "Function mysqli_connect is not available.";
             }
 
         ?>

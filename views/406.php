@@ -22,13 +22,13 @@
   <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">404 - NOT FOUND</h1>
-            <p class="lead">The page you are looking for was not found. Wait until 72 hours before calling police to report a missing page.</p>
+            <h1 class="display-4">Not acceptable Data</h1>
+            <p class="lead">The data has something suspicious and did not passed our screening process! Shame on you!</p>
         </div>
     </div>
 
     <div class="container">
-        <img src="/img/data404.gif" width="900">
+        <img src="/img/dataJoke.gif" width="900">
     </div>
 
     <!-- Optional JavaScript -->

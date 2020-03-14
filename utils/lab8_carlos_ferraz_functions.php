@@ -12,6 +12,8 @@
 
         foreach ($arrayInput as $key=>$value) {
             
+            // check whether key or value are null or empty
+            // the key to be null or empty is not possible, but checked anyway
             if ( is_null($key) || is_null($value) || $key==="" || $value==="" ) {
                 break;
             }
