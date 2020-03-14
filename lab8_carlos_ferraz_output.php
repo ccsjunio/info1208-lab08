@@ -60,7 +60,7 @@ include_once _ROOTFOLDER_."/data/data.php";
                     </div>
                 </div> 
             </div>
-        EOF;
+EOF;
 
         // end row markup if line ends
         if($column===$columnsPerRow || ++$counter===count($holdingsPosted) || count($holdingsPosted)===1 ){
