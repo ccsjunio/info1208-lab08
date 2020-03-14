@@ -29,7 +29,7 @@
             <input type="checkbox" class="form-check-input" id="$holdingId" name="holding[]" value="$holdingId" >
             <label class="form-check-label" for="exampleCheck1"><i class="fas $holdingIcon"></i>   I have $article $holdingName</label>
         </div>
-        EOF;
+EOF;
 
         // adding markup from this holding to the main markup
         $holdingChoicesMarkup .= $markup;
