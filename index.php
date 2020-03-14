@@ -17,10 +17,7 @@
         $holdingPicture = $holding['image'];
         $holdingIcon    = $holding['icon'];
 
-        // identifies if the holding name initiates with a vowel
-        // in order to agree with the article
-        $pattern = '/^[aeiou]/';
-        $article = preg_match($pattern, $holdingName)===0 ? "a" : "an";
+        $article = undefinedArticleTo($holdingName)
 
         // markup template changing only the variables
         $markup = <<<EOF

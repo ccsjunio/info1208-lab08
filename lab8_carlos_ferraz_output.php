@@ -1,21 +1,26 @@
 <?php
-
-define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);    
+define("_ROOTFOLDER_", $_SERVER['DOCUMENT_ROOT']);
 
 // if holding posts have no value and was not defined
 // redirect to error page
 // when no checkbox is marked no array is sent 
 // from the form
 if(!isset($_POST['holding'])){
-    header("Location:".$_SERVER['REMOTE_HOST']."/views/404.php");
+    header("Location:".$_SERVER['REMOTE_HOST']."/views/204.php");
 }
 
 // include functions file statements
-include _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
+include_once _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
 
     require_once _ROOTFOLDER_."/data/data.php";
 
-    $holdingsPosted = $_POST['holding'];
+    $sanitizedPosting = sanitizeArray($_POST['holding']);
+    $holdingsPosted = $sanitizedPosting ? $sanitizedPosting : false;
+
+    if(!$holdingsPosted){
+        header("Location:".$_SERVER['REMOTE_HOST']."/views/406.php");
+    }
+
     $holdingsDeclared = array();
 
     $holdingsMarkup = "";
@@ -23,40 +28,45 @@ include _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
     $columnsPerRow = 3;
     $row = 1;
     $column = 1;
+    $counter = 1;
 
     foreach($holdingsPosted as $key=>$id){
-        echo "key=$key and value=$id";
         if($column===1){
             $holdingsMarkup .= '<div class="row">';
         }
 
         $holdingName = ($holdings[$id]['name']);
-        $holdingImage = $_SERVER['REMOTE_HOST']."/img/".$holdings[$id]['image'];
+        $holdingImage = $_SERVER['HTTP_REFERER']."/img/".$holdings[$id]['image'];
+
+        $holdingName = undefinedArticleTo($holdingName) . " " . $holdingName;
 
         $holdingsMarkup .= <<<EOF
-        
-            <div class="col-sm">
+            <div class="col">
                 <div class="card">
-                    <img src="$holdingImage" width="300"/>
+                    <img class="mx-auto" src="$holdingImage"/>
                     <div class="card-body">
-                    <h5 class="card-title">$holdingName</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">$holdingName</h5>
+                        <p class="card-text"></p>
+                        <p class="card-text"><small class="text-muted"></small></p>
                     </div>
-                </div>
-                
+                </div> 
             </div>
         EOF;
 
-        if($column===$columnsPerRow){
+        // end row markup if line ends
+        if($column===$columnsPerRow || ++$counter===count($holdingsPosted)){
             $holdingsMarkup .= '</div>';
         }
 
+        // if the columns are at maximum
+        // change row
         if(++$column>$columnsPerRow){
             $row++;
+            $column=1;
         }
-    }
 
+
+    }
 ?>
 
 <!doctype html>
@@ -82,10 +92,36 @@ include _ROOTFOLDER_."/utils/lab8_carlos_ferraz_functions.php";
     </div>
 
     <div class="container">
-        
         <!-- include markup for the holdings choices -->
         <?php echo $holdingsMarkup; ?> 
-</div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Dump of data received through POST:</h1>
+        </div>
+    </div>
+
+    <div class="container variableDump">
+        <?php print_r($_POST); ?>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">About mysqli_connect():</h1>
+        </div>
+    </div>
+
+    <div class="container variableDump">
+        <?php 
+            if(function_exists('mysqli_connect')){
+                echo "Function mysqli_connect is avalable";
+            } else {
+                echo "Function mysqli_connect is not available. Yay!";
+            }
+
+        ?>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
